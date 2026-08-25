@@ -18,22 +18,35 @@ export default function Navbar() {
         </Link>
 
         {user && (
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-slate-400 hidden sm:block">
-              {user.name}
-            </span>
-            <span className="text-sm bg-indigo-900 text-indigo-300 px-3 py-1 rounded-full">
-              {user.credits} credit{user.credits !== 1 ? 's' : ''}
-            </span>
+          <div className="flex items-center gap-3 sm:gap-4">
+            <Link
+              to="/dashboard"
+              className="text-sm text-slate-300 hover:text-white transition-colors"
+            >
+              Dashboard
+            </Link>
+
+            <Link
+              to="/buy-credits"
+              className="text-sm bg-slate-900 hover:bg-slate-800 border border-slate-700 text-emerald-300 px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 shadow-sm"
+              title="Buy more credits"
+            >
+              <span className="w-2 h-2 rounded-full bg-emerald-400" />
+              <span className="font-bold">{user.credits ?? 0}</span>
+              <span className="text-xs text-slate-400">credits</span>
+              <span className="text-emerald-400 font-bold ml-0.5">+</span>
+            </Link>
+
             <Link
               to="/interview/new"
-              className="text-sm bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-1.5 rounded-lg transition-colors"
+              className="text-sm bg-emerald-600 hover:bg-emerald-500 font-semibold text-white px-3.5 py-1.5 rounded-xl transition-all shadow-md shadow-emerald-950/40"
             >
-              New interview
+              + New Interview
             </Link>
+
             <button
               onClick={handleLogout}
-              className="text-sm text-slate-400 hover:text-white transition-colors"
+              className="text-xs text-slate-400 hover:text-white transition-colors px-2 py-1"
             >
               Sign out
             </button>

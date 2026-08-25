@@ -1,0 +1,99 @@
+================================================================
+        INTERVIEW AGENT — PROJECT REPORT
+================================================================
+
+PROJECT: AI-Powered Technical Interview Practice Platform
+STACK:   MERN (MongoDB, Express, React, Node.js)
+AI:      Google Gemini (gemini-3.5-flash-lite / gemini-3.6-flash) — Free tier
+PAYMENT: Razorpay (Indian payments)
+
+----------------------------------------------------------------
+TASKS COMPLETED (MAIN HIGHLIGHTS)
+----------------------------------------------------------------
+
+1. FULL-STACK ARCHITECTURE & DATABASE
+   - Frontend: React 18 + Vite + React Router v6 + Tailwind CSS
+   - Backend: Node.js + Express REST API (CommonJS)
+   - Database: MongoDB Atlas with Mongoose models (User, Interview)
+
+2. AUTHENTICATION & CREDITS SYSTEM
+   - Secure JWT token authentication (Register / Login / Protect middleware)
+   - 5 free credits provided on registration
+   - Balance tracking in Navbar with automatic credit deduction per session
+
+3. RAZORPAY PAYMENT GATEWAY
+   - Integrated Razorpay INR checkout for credit purchases
+   - 4 credit tiers (Starter ₹50, Basic ₹100, Pro ₹225, Premium ₹400)
+   - Instant automated credit addition upon verified payment signature
+
+4. MULTI-ROUND INTERVIEW TYPES
+   - Technical Round: Focuses on coding, architecture, frameworks & algorithms
+   - HR & Behavioral Round: Focuses on STAR scenarios, teamwork, culture fit & motivation
+   - Mixed Round: Comprehensive blend of technical and behavioral questions
+
+5. SESSION-BASED SMART INTERVIEW UI
+   - AI Interviewer Avatar with live audio visualizer indicator
+   - Spoken question subtitle bubble card
+   - Interview status widget ("AI Speaking", "Listening", "Ready", "Evaluating")
+   - Circular countdown timer (60s with animated progress ring)
+   - Question counters ("X Current Questions" / "Y Total Questions")
+   - Web Speech API Speech-to-Text: microphone recording for voice answers
+   - Web Speech API Text-to-Speech: AI voice reading questions out loud
+   - Picture-in-Picture floating webcam preview in bottom-right corner
+
+6. DATABASE SESSION PERSISTENCE
+   - Stored active `currentQuestionIndex` and responses in MongoDB
+   - Browser refresh automatically resumes at the exact question without data loss
+   - Real-time progress updates via `PATCH /api/interviews/:id/progress`
+
+7. INTELLIGENT 4-METRIC RUBRIC FEEDBACK ENGINE
+   - 4 Core Competencies: Clarity, Correctness, Structure, Confidence (0-10 each)
+   - Actionable Feedback Elements:
+       * Per-metric visual progress bars
+       * Key Strengths bullet points
+       * High-impact Improvement Tips
+       * Ideal Model Answer snippet showing top-candidate responses
+
+8. PERSISTENT EVALUATION REPORT & DASHBOARD
+   - Executive Performance Badge (Senior Ready, Proficient, Needs Practice)
+   - Holistic round summary synthesis and growth recommendations
+   - Printable / PDF exportable report
+   - Permanent storage in MongoDB: revisitable anytime via Dashboard
+
+9. PERFORMANCE OPTIMIZATIONS & BUG FIXES
+   - Upgraded AI model to `gemini-3.5-flash-lite` for ultra-fast evaluations (~1.2s response)
+   - Multi-model automatic fallback (`gemini-3.6-flash`, `gemini-3.7-flash`) to prevent 503 errors
+   - Fixed Windows MongoDB DNS issue, EADDRINUSE port conflict, and JSON formatting
+
+----------------------------------------------------------------
+ENVIRONMENT VARIABLES REQUIRED
+----------------------------------------------------------------
+
+   server/.env:
+   - MONGODB_URI          : MongoDB Atlas connection string
+   - JWT_SECRET           : Secret key for JWT tokens
+   - JWT_EXPIRES_IN       : Token expiry (e.g. 7d)
+   - CLIENT_URL           : Frontend URL (http://localhost:3000)
+   - GEMINI_API_KEY       : Google AI Studio free API key
+   - RAZORPAY_KEY_ID      : Razorpay test/live key ID
+   - RAZORPAY_KEY_SECRET  : Razorpay secret key
+
+   client/.env:
+   - VITE_API_URL         : Backend API URL (http://localhost:5000/api)
+
+----------------------------------------------------------------
+HOW TO RUN
+----------------------------------------------------------------
+
+   # Terminal 1 — Backend
+   cd server
+   npm run dev         (port 5000)
+
+   # Terminal 2 — Frontend
+   cd client
+   npm run dev         (port 3000)
+
+   # Health check
+   GET http://localhost:5000/api/health
+
+================================================================

@@ -2,21 +2,25 @@
   "name": "interview-agent-server",
   "version": "1.0.0",
   "description": "MERN Interview Agent — Express API",
-  "main": "src/index.js",
+  "main": "server.js",
   "type": "commonjs",
   "scripts": {
-    "dev": "nodemon src/index.js",
-    "start": "node src/index.js"
+    "dev": "nodemon --exitcrash server.js",
+    "start": "node server.js",
+    "kill-port": "for /f \"tokens=5\" %a in ('netstat -aon ^| find \":5000\"') do taskkill /F /PID %a"
   },
   "dependencies": {
+    "@google/genai": "^2.18.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.6.1",
     "express": "^4.19.2",
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
+    "mongodb": "^7.5.0",
     "mongoose": "^8.5.1",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "razorpay": "^2.9.8"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"

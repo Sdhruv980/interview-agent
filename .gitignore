@@ -8,9 +8,9 @@ out/
 
 # Environment files — NEVER commit real secrets
 .env
-.env.local
-.env.production
-.env.*.local
+.env.*
+*.env
+atlas-credentials.env
 
 # Logs
 *.log
