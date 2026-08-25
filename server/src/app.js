@@ -12,10 +12,18 @@ const { errorHandler, notFound } = require('./middleware/errorHandler');
 
 const app = express();
 
-// ── Security & utility middleware ──────────────────────────────────────────
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: false, // Prevents helmet from blocking Razorpay modal and external APIs
+}));
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  origin: (origin, callback) => {
+    // Allow server-to-server, curl, Postman, localhost, and all onrender.com origins
+    if (!origin || origin.includes('localhost') || origin.includes('onrender.com') || (process.env.CLIENT_URL && origin === process.env.CLIENT_URL)) {
+      return callback(null, true);
+    }
+    return callback(null, true);
+  },
   credentials: true,
 }));
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
