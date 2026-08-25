@@ -1,6 +1,9 @@
 import axios from 'axios';
 
 const getBaseUrl = () => {
+  if (typeof window !== 'undefined' && localStorage.getItem('API_URL')) {
+    return localStorage.getItem('API_URL');
+  }
   if (import.meta.env.VITE_API_URL) {
     return import.meta.env.VITE_API_URL;
   }
@@ -15,8 +18,12 @@ const api = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
-// Attach JWT on every request if present
+// Dynamically attach baseURL from localStorage and attach JWT on every request
 api.interceptors.request.use((config) => {
+  const customUrl = localStorage.getItem('API_URL');
+  if (customUrl) {
+    config.baseURL = customUrl;
+  }
   const token = localStorage.getItem('token');
   if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
