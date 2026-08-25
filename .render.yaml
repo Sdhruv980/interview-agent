@@ -29,9 +29,8 @@
         sync: false
 
   # ── 2. Frontend Static Site (React 18 + Vite) ─────────────────────────────
-  - type: web
+  - type: static
     name: interview-agent-client
-    runtime: static
     rootDir: client
     buildCommand: npm install && npm run build
     staticPublishPath: dist
